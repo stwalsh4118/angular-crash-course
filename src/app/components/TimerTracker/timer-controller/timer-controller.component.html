@@ -1,0 +1,21 @@
+<div class="timer-container">
+	<div>Remaining Session Time</div>
+	<cd-timer
+		class="main-timer"
+		format="intelli"
+		[countdown]="true"
+		[startTime]="startTime"
+		[autoStart]="false"
+		#maintimer
+	></cd-timer>
+	<cd-timer
+		class="remaining-time-timer remaining-time-text"
+		format="intelli"
+	></cd-timer>
+	<div class="remaining-time-text">Remaining Task Time</div>
+	<button (click)="toggleTimer()">
+		{{ timerRunning ? "Stop" : "Start" }} Timer
+	</button>
+	<button (click)="subTime()">Sub time</button>
+	<button (click)="logTime()">Log Time</button>
+</div>
