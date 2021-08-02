@@ -56,6 +56,11 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	resetTimer() {
+		this.toggleTimer();
+		this.initTimer();
+	}
+
 	changeTask(): void {
 		this.timerService.taskChange();
 	}

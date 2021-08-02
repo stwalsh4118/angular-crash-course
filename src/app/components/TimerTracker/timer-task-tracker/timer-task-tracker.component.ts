@@ -20,35 +20,36 @@ export class TimerTaskTrackerComponent implements OnInit {
 	constructor(private timerService: TimerService) {
 		this.subscription = this.timerService
 			.onTasksChange()
-			.subscribe(() => this.loadTimerTasks());
+			.subscribe(() => this.loadTimerTasks(1));
 	}
 
 	ngOnInit(): void {
-		this.loadTimerTasks();
+		this.loadTimerTasks(1);
 	}
 
-	onTasksLoaded(timerTasks: TimerTask[]): void {
+	onTasksLoaded(timerTasks: TimerTask[], taskID: number): void {
 		this.timerTasks = timerTasks;
-		this.currentTask = timerTasks[0];
+		let foundFromTaskID: TimerTask | undefined = timerTasks.find(
+			(task) => task.id === taskID
+		);
+		if (typeof foundFromTaskID !== "undefined") {
+			this.currentTask = foundFromTaskID;
+		} else {
+			this.currentTask = timerTasks[0];
+		}
 		this.timerController.currentTask = this.currentTask;
 		this.timerController.timerTasks = this.timerTasks;
 		this.timerController.initTimer();
 	}
 
-	onTaskChange(timerTask: TimerTask): void {
-		console.log(timerTask);
-		let newTT: TimerTask = {
-			taskDescription: timerTask.taskDescription,
-			taskLength: timerTask.taskLength - 10,
-		};
-		this.timerTasks.filter((task) => task.id !== timerTask.id);
-		this.timerTasks.push(newTT);
-		this.loadTimerTasks();
+	onTaskChange(timerTask: TimerTask, taskID: number): void {
+		console.log(timerTask, taskID);
+		this.loadTimerTasks(taskID);
 	}
 
-	loadTimerTasks(): void {
+	loadTimerTasks(taskID: number): void {
 		this.timerService
 			.getTimerTasks()
-			.subscribe((timerTasks) => this.onTasksLoaded(timerTasks));
+			.subscribe((timerTasks) => this.onTasksLoaded(timerTasks, taskID));
 	}
 }

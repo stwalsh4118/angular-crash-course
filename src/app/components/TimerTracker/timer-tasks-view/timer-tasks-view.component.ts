@@ -14,6 +14,7 @@ export class TimerTasksViewComponent implements OnInit {
 	ngOnInit(): void {}
 
 	onTaskClick(timerTask: TimerTask): void {
-		this.taskClick.emit(timerTask);
+		let timerID = timerTask.id;
+		this.taskClick.emit({ timerTask: timerTask, taskID: timerID });
 	}
 }

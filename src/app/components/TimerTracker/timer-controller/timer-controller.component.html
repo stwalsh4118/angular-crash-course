@@ -4,6 +4,7 @@
 		size="2x"
 		class="refreshIcon"
 		matTooltip="Restart Main Timer"
+		(click)="resetTimer()"
 	></fa-icon>
 	<div>
 		{{ isPomodoro ? "Remaining Session Time" : "Current Session Time" }}

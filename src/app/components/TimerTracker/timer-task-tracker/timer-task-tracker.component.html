@@ -5,7 +5,7 @@
 	<div class="bottom-wrapper">
 		<app-timer-tasks-view
 			[timerTasks]="timerTasks"
-			(taskClick)="onTaskChange($event)"
+			(taskClick)="onTaskChange($event.timerTask, $event.taskID)"
 		></app-timer-tasks-view>
 		<div class="task-actions-container"></div>
 	</div>
