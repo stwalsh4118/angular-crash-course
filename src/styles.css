@@ -87,3 +87,12 @@ body {
 	margin: 0;
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.task-actions-container {
+	background-color: #ededed;
+	width: 35vw;
+	height: 40vh;
+	border-radius: 40px;
+	filter: drop-shadow(0.55rem 0.55rem 0.9rem rgba(0, 0, 0, 0.5));
+	padding: 2vh;
+}

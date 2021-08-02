@@ -26,3 +26,41 @@
 	padding-top: 6vh;
 	padding-bottom: 1vh;
 }
+
+.timerControllerButton {
+	position: absolute;
+	border-radius: 20px;
+	background-color: #f6b9d6;
+	border: none;
+	filter: drop-shadow(0.25rem 0.25rem 0.1rem rgba(0, 0, 0, 0.5));
+	color: white;
+}
+
+.timerControllerButton:active {
+	transform: scale(0.98);
+}
+
+.timerToggleButton {
+	height: 10vh;
+	width: 30vh;
+	bottom: 3vh;
+	font-size: 3vh;
+}
+
+.timerModeToggle {
+	width: 12vh;
+	height: 3vh;
+	right: 4vh;
+}
+
+.refreshIcon {
+	position: absolute;
+	left: 2.8vh;
+	top: 2.8vh;
+	color: #f6b9d6;
+	filter: drop-shadow(0.1rem 0.1rem 0.05rem rgba(0, 0, 0, 0.5));
+}
+
+.refreshIcon:active {
+	transform: scale(0.98);
+}

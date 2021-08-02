@@ -1,0 +1,10 @@
+<div class="task-actions-container">
+	<div class="timerTasksTitle">Todays Tasks</div>
+	<div class="timerTasksView">
+		<app-timer-task
+			*ngFor="let t of timerTasks"
+			[timerTask]="t"
+			(click)="onTaskClick(t)"
+		></app-timer-task>
+	</div>
+</div>

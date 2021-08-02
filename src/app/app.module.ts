@@ -7,6 +7,7 @@ import { MatSliderModule } from "@angular/material/slider";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { CdTimerModule } from "angular-cd-timer";
 import { MatButtonModule } from "@angular/material/button";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./components/header/header.component";
@@ -20,6 +21,8 @@ import { FooterComponent } from "./components/footer/footer.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TimerTaskTrackerComponent } from "./components/TimerTracker/timer-task-tracker/timer-task-tracker.component";
 import { TimerControllerComponent } from "./components/TimerTracker/timer-controller/timer-controller.component";
+import { TimerTasksViewComponent } from "./components/TimerTracker/timer-tasks-view/timer-tasks-view.component";
+import { TimerTaskComponent } from './components/TimerTracker/timer-task/timer-task.component';
 
 const appRoutes: Routes = [
 	{ path: "", component: TasksComponent },
@@ -39,6 +42,8 @@ const appRoutes: Routes = [
 		FooterComponent,
 		TimerTaskTrackerComponent,
 		TimerControllerComponent,
+		TimerTasksViewComponent,
+  TimerTaskComponent,
 	],
 	imports: [
 		FontAwesomeModule,
@@ -51,6 +56,7 @@ const appRoutes: Routes = [
 		RouterModule.forRoot(appRoutes),
 		CdTimerModule,
 		MatButtonModule,
+		MatTooltipModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

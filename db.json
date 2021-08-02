@@ -12,5 +12,17 @@
       "day": "May 6th at 1:30pm",
       "reminder": false
     }
+  ],
+  "timer-tasks": [
+    {
+      "id": 1,
+      "taskDescription": "Read",
+      "taskLength": 58
+    },
+    {
+      "id": 2,
+      "taskDescription": "Yoga",
+      "taskLength": 3600
+    }
   ]
 }

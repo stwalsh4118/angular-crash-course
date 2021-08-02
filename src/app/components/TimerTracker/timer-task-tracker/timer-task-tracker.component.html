@@ -1,9 +1,12 @@
 <div class="app-wrapper">
 	<div class="top-wrapper">
-		<app-timer-controller [timerTasks]="timerTasks"> </app-timer-controller>
+		<app-timer-controller> </app-timer-controller>
 	</div>
 	<div class="bottom-wrapper">
-		<div class="task-actions-container"></div>
+		<app-timer-tasks-view
+			[timerTasks]="timerTasks"
+			(taskClick)="onTaskChange($event)"
+		></app-timer-tasks-view>
 		<div class="task-actions-container"></div>
 	</div>
 </div>
