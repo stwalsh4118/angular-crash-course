@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { CdTimerComponent } from "angular-cd-timer";
 import { TimerTask } from "src/app/TimerTask";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { TimerService } from "src/app/services/timer.service";
 
 @Component({
 	selector: "app-timer-task",
@@ -10,11 +12,18 @@ import { TimerTask } from "src/app/TimerTask";
 export class TimerTaskComponent implements OnInit {
 	@Input() timerTask!: TimerTask;
 	@ViewChild("timer") timer!: CdTimerComponent;
-	constructor() {}
+	faTimes = faTimes;
+	constructor(private timerService: TimerService) {}
 
 	ngOnInit(): void {}
 
 	autoStop(): void {
 		this.timer.stop();
+	}
+
+	deleteTask(): void {
+		this.timerService
+			.deleteTask(this.timerTask)
+			.subscribe(() => this.timerService.taskChange(-1));
 	}
 }

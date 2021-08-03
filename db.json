@@ -15,14 +15,9 @@
   ],
   "timer-tasks": [
     {
-      "id": 1,
       "taskDescription": "Read",
-      "taskLength": 47
-    },
-    {
-      "id": 2,
-      "taskDescription": "Yoga",
-      "taskLength": 3600
+      "taskLength": 1830,
+      "id": 1
     }
   ]
 }

@@ -18,6 +18,7 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 	@ViewChild("remainingtimer") remainingTimer!: CdTimerComponent;
 
 	timerRunning: boolean = false;
+	timerStartedBefore: boolean = false;
 	startTime: number = 1200;
 	remainingTime: number = 0;
 
@@ -50,23 +51,38 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 			this.remainingTimer.startTime =
 				this.remainingTimer.get().tick_count;
 			this.currentTask.taskLength = this.remainingTimer.startTime;
-			this.timerService
-				.updateTimerTask(this.currentTask)
-				.subscribe(() => this.changeTask());
+
+			let currentTaskId: number | undefined = this.currentTask.id;
+
+			if (typeof currentTaskId !== "undefined") {
+				let id: number = currentTaskId;
+				this.timerService
+					.updateTimerTask(this.currentTask)
+					.subscribe(() => this.changeTask(id));
+				console.log(id);
+			} else {
+				this.timerService
+					.updateTimerTask(this.currentTask)
+					.subscribe(() => this.changeTask(0));
+			}
 		}
 	}
 
 	resetTimer() {
-		this.toggleTimer();
+		this.timerStartedBefore = false;
+		if (this.timerRunning) {
+			this.toggleTimer();
+		}
 		this.initTimer();
 	}
 
-	changeTask(): void {
-		this.timerService.taskChange();
+	changeTask(nextTaskID: number): void {
+		this.timerService.taskChange(nextTaskID);
 	}
 
 	toggleTimerMode(): void {
 		this.isPomodoro = !this.isPomodoro;
+		this.timerStartedBefore = false;
 		this.initTimer();
 	}
 
@@ -77,14 +93,17 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 		this.remainingTimer.start();
 		this.remainingTimer.stop();
 
-		if (this.isPomodoro) {
-			this.mainTimer.startTime = this.startTime;
-			this.mainTimer.countdown = true;
-		} else {
-			this.mainTimer.startTime = 0;
+		if (!this.timerStartedBefore) {
+			if (this.isPomodoro) {
+				this.mainTimer.startTime = this.startTime;
+				this.mainTimer.countdown = true;
+			} else {
+				this.mainTimer.startTime = 0;
+			}
 		}
 		this.mainTimer.start();
 		this.mainTimer.stop();
+		this.timerStartedBefore = true;
 	}
 
 	checkCurrentTask(): void {

@@ -23,6 +23,7 @@ import { TimerTaskTrackerComponent } from "./components/TimerTracker/timer-task-
 import { TimerControllerComponent } from "./components/TimerTracker/timer-controller/timer-controller.component";
 import { TimerTasksViewComponent } from "./components/TimerTracker/timer-tasks-view/timer-tasks-view.component";
 import { TimerTaskComponent } from './components/TimerTracker/timer-task/timer-task.component';
+import { TimerTaskAddComponent } from './components/TimerTracker/timer-task-add/timer-task-add.component';
 
 const appRoutes: Routes = [
 	{ path: "", component: TasksComponent },
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
 		TimerControllerComponent,
 		TimerTasksViewComponent,
   TimerTaskComponent,
+  TimerTaskAddComponent,
 	],
 	imports: [
 		FontAwesomeModule,

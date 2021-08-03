@@ -14,7 +14,7 @@
 }
 
 .task-length {
-	position: relative;
+	position: absolute;
 	padding-left: 10px;
 	border-left: 2px solid black;
 	left: 60%;
@@ -22,4 +22,11 @@
 
 .task-description {
 	padding-left: 5px;
+}
+
+fa-icon {
+	color: white;
+	filter: drop-shadow(0.1rem 0.1rem 0.02rem rgba(0, 0, 0, 0.5));
+	position: absolute;
+	right: 50px;
 }

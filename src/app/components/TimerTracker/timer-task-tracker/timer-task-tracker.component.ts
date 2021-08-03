@@ -20,7 +20,7 @@ export class TimerTaskTrackerComponent implements OnInit {
 	constructor(private timerService: TimerService) {
 		this.subscription = this.timerService
 			.onTasksChange()
-			.subscribe(() => this.loadTimerTasks(1));
+			.subscribe((nextTaskID) => this.loadTimerTasks(nextTaskID));
 	}
 
 	ngOnInit(): void {

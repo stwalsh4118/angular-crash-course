@@ -1,0 +1,34 @@
+<div class="task-actions-container">
+	<div class="task-add-view">
+		<div class="task-add-title">Add A Timed Task For Today!</div>
+		<div class="add-timer-task-form">
+			<form class="add-timer-task" (ngSubmit)="onSubmit()">
+				<div class="add-timer-task-input">
+					<label for="timerTaskDescription">
+						Timed Task Description</label
+					>
+					<input
+						type="text"
+						name="timerTaskDescription"
+						[(ngModel)]="timerTaskDescription"
+					/>
+				</div>
+				<div class="add-timer-task-input">
+					<label for="timerTaskLength"> Timed Task Length</label>
+					<input
+						type="text"
+						name="timerTaskLength"
+						[(ngModel)]="timerTaskLength"
+						placeholder="HH:MM:SS"
+						matTooltip="Input a time duration in HH:MM:SS format only!"
+					/>
+				</div>
+				<input
+					class="add-timer-task-submit"
+					type="submit"
+					value="Add Timed Task"
+				/>
+			</form>
+		</div>
+	</div>
+</div>

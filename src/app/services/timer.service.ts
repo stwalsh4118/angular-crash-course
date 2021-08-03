@@ -27,8 +27,17 @@ export class TimerService {
 		return this.http.put<TimerTask>(url, timerTask, httpOptions);
 	}
 
-	taskChange(): void {
-		this.subject.next(true);
+	addTimerTask(timerTask: TimerTask): Observable<TimerTask> {
+		return this.http.post<TimerTask>(this.apiUrl, timerTask, httpOptions);
+	}
+
+	deleteTask(timerTask: TimerTask): Observable<TimerTask> {
+		const url = `${this.apiUrl}/${timerTask.id}`;
+		return this.http.delete<TimerTask>(url);
+	}
+
+	taskChange(nextTaskID: number): void {
+		this.subject.next(nextTaskID);
 	}
 
 	onTasksChange(): Observable<any> {
