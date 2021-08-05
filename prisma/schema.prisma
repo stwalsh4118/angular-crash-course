@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+    id          Int     @default(autoincrement()) @id
+    username    String  @unique
+    password    String
+    timerTasks  TimerTask[]
+    @@map(name: "users")
+}
+
+model TimerTask {
+    id              Int     @default(autoincrement()) @id
+    user_id         Int     
+    taskDescription String
+    taskLength      Int
+    User            User    @relation(fields: [user_id], references: [id])  
+}
