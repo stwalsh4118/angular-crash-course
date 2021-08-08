@@ -43,4 +43,9 @@ export class TimerService {
 	onTasksChange(): Observable<any> {
 		return this.subject.asObservable();
 	}
+
+	getTasksFromDB(username: string): Observable<any> {
+		const url = "http://localhost:3000/api/user/" + username;
+		return this.http.get<any>(url);
+	}
 }

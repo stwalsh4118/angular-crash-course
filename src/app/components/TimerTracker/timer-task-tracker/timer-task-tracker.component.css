@@ -26,3 +26,21 @@
 		rgba(255, 255, 255, 1) 100%
 	);
 }
+
+.login-link {
+	position: absolute;
+	font-size: x-large;
+	color: white;
+	text-decoration: none;
+	margin: 3vh;
+	right: 0%;
+	filter: drop-shadow(0.05rem 0.05rem 0.01rem rgba(0, 0, 0, 0.5));
+}
+
+.login-link:visited {
+	color: white;
+}
+
+.login-link:active {
+	transform: scale(0.98);
+}

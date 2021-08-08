@@ -12,8 +12,8 @@ import { TimerTask } from "src/app/TimerTask";
 })
 export class TimerControllerComponent implements OnInit, AfterViewInit {
 	faRedo = faRedo;
-	timerTasks: TimerTask[] = [];
-	currentTask!: TimerTask;
+	@Input() timerTasks: TimerTask[] = [];
+	@Input() currentTask!: TimerTask;
 	@ViewChild("maintimer") mainTimer!: CdTimerComponent;
 	@ViewChild("remainingtimer") remainingTimer!: CdTimerComponent;
 

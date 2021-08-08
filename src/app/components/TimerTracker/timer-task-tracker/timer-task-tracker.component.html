@@ -1,6 +1,11 @@
 <div class="app-wrapper">
+	<a routerLink="/login" class="login-link">Login</a>
 	<div class="top-wrapper">
-		<app-timer-controller> </app-timer-controller>
+		<app-timer-controller
+			[timerTasks]="timerTasks"
+			[currentTask]="currentTask"
+		>
+		</app-timer-controller>
 	</div>
 	<div class="bottom-wrapper">
 		<app-timer-tasks-view

@@ -1,0 +1,30 @@
+<div class="login-wrapper">
+	<div class="login-form">
+		<div class="login-title">LOGIN TO TIMER TRACKER</div>
+		<form class="login" (ngSubmit)="onSubmit()">
+			<div class="username">
+				<label for="username">Username</label>
+				<input
+					type="text"
+					name="username"
+					[(ngModel)]="username"
+					placeholder="Username"
+					class="login-input"
+				/>
+			</div>
+			<div class="password">
+				<label for="password">Password</label>
+				<input
+					type="password"
+					name="password"
+					[(ngModel)]="password"
+					placeholder="Password"
+					class="login-input"
+					required
+				/>
+			</div>
+			<input type="submit" class="login-submit" value="Login" />
+		</form>
+		<a class="register-link" routerLink="/register">Register</a>
+	</div>
+</div>

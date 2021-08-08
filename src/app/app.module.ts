@@ -22,13 +22,17 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TimerTaskTrackerComponent } from "./components/TimerTracker/timer-task-tracker/timer-task-tracker.component";
 import { TimerControllerComponent } from "./components/TimerTracker/timer-controller/timer-controller.component";
 import { TimerTasksViewComponent } from "./components/TimerTracker/timer-tasks-view/timer-tasks-view.component";
-import { TimerTaskComponent } from './components/TimerTracker/timer-task/timer-task.component';
-import { TimerTaskAddComponent } from './components/TimerTracker/timer-task-add/timer-task-add.component';
+import { TimerTaskComponent } from "./components/TimerTracker/timer-task/timer-task.component";
+import { TimerTaskAddComponent } from "./components/TimerTracker/timer-task-add/timer-task-add.component";
+import { LoginComponent } from "./components/TimerTracker/auth/login/login.component";
+import { RegisterComponent } from "./components/TimerTracker/auth/register/register.component";
 
 const appRoutes: Routes = [
 	{ path: "", component: TasksComponent },
 	{ path: "about", component: AboutComponent },
 	{ path: "TimerTracker", component: TimerTaskTrackerComponent },
+	{ path: "login", component: LoginComponent },
+	{ path: "register", component: RegisterComponent },
 ];
 
 @NgModule({
@@ -44,8 +48,10 @@ const appRoutes: Routes = [
 		TimerTaskTrackerComponent,
 		TimerControllerComponent,
 		TimerTasksViewComponent,
-  TimerTaskComponent,
-  TimerTaskAddComponent,
+		TimerTaskComponent,
+		TimerTaskAddComponent,
+		LoginComponent,
+		RegisterComponent,
 	],
 	imports: [
 		FontAwesomeModule,
