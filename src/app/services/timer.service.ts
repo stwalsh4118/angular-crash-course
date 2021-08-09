@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { TimerTask } from "../TimerTask";
 import { AuthService } from "./auth.service";
+import { environment } from "src/environments/environment";
 
 const httpOptions = {
 	headers: new HttpHeaders({
@@ -14,6 +15,10 @@ const httpOptions = {
 	providedIn: "root",
 })
 export class TimerService {
+	private API_ROUTE = !environment.production
+		? "http://localhost:3000/"
+		: "https://angular-crash-course.vercel.app/";
+
 	private apiUrl: string = "http://localhost:5000/timer-tasks";
 	private subject = new Subject<any>();
 
@@ -49,6 +54,7 @@ export class TimerService {
 	}
 
 	getTasksFromDB(username: string): Observable<any> {
+		console.log(username);
 		const url = "http://localhost:3000/api/user/" + username;
 		return this.http.get<any>(url);
 	}

@@ -73,3 +73,22 @@
 	width: 100%;
 	height: 100%;
 }
+
+.home-link {
+	position: absolute;
+	font-size: x-large;
+	color: white;
+	text-decoration: none;
+	margin: 3vh;
+	filter: drop-shadow(0.05rem 0.05rem 0.01rem rgba(0, 0, 0, 0.5));
+}
+
+.login-link {
+	position: absolute;
+	font-size: x-large;
+	color: white;
+	text-decoration: none;
+	margin: 3vh;
+	right: 0%;
+	filter: drop-shadow(0.05rem 0.05rem 0.01rem rgba(0, 0, 0, 0.5));
+}

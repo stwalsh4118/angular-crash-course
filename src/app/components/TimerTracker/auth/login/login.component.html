@@ -1,4 +1,6 @@
 <div class="login-wrapper">
+	<a routerLink="/TimerTracker" class="home-link">Home</a>
+	<a routerLink="/register" class="login-link">Register</a>
 	<div class="login-form">
 		<div class="login-title">LOGIN TO TIMER TRACKER</div>
 		<form class="login" (ngSubmit)="onSubmit()">
@@ -25,6 +27,5 @@
 			</div>
 			<input type="submit" class="login-submit" value="Login" />
 		</form>
-		<a class="register-link" routerLink="/register">Register</a>
 	</div>
 </div>

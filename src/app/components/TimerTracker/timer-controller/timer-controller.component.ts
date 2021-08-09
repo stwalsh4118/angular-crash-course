@@ -13,7 +13,14 @@ import { TimerTask } from "src/app/TimerTask";
 export class TimerControllerComponent implements OnInit, AfterViewInit {
 	faRedo = faRedo;
 	@Input() timerTasks: TimerTask[] = [];
-	@Input() currentTask!: TimerTask;
+	@Input() get currentTask(): TimerTask {
+		return this._currentTask;
+	}
+	set currentTask(task: TimerTask) {
+		this._currentTask = task;
+		this.initTimer();
+	}
+	private _currentTask!: TimerTask;
 	@ViewChild("maintimer") mainTimer!: CdTimerComponent;
 	@ViewChild("remainingtimer") remainingTimer!: CdTimerComponent;
 
@@ -83,6 +90,10 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 	}
 
 	initTimer(): void {
+		if (!this.currentTask) {
+			return;
+		}
+
 		this.remainingTime = this.currentTask.taskLength;
 		this.remainingTimer.startTime = this.remainingTime;
 		this.remainingTimer.countdown = true;

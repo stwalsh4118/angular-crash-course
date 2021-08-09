@@ -27,3 +27,32 @@ export const verifyUser = async (password: string, username: string) => {
 
 	return await compare(password, hashedPassword);
 };
+
+export const registerUser = async (username: string, password: string) => {
+	let User;
+	try {
+		User = await prisma.user.findUnique({
+			where: { username: username },
+		});
+	} catch (err) {
+		console.log(err);
+		return false;
+	}
+
+	if (!User) {
+		const hashedPassword = await hashPassword(password);
+		try {
+			const newUser = await prisma.user.create({
+				data: {
+					username: username,
+					password: hashedPassword,
+				},
+			});
+			return true;
+		} catch (err) {
+			return false;
+		}
+	}
+
+	return false;
+};

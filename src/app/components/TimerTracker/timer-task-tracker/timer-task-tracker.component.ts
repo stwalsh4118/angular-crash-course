@@ -39,13 +39,15 @@ export class TimerTaskTrackerComponent implements OnInit {
 	}
 
 	retrieveTasks(user: any): void {
-		const { sub } = user;
+		console.log(user);
+		const subject = user.sub;
 		if (user.error) {
 			alert("Invalid Session Token, Login Again Please!");
 			return;
 		}
+		console.log(subject);
 		this.timerService
-			.getTasksFromDB(sub)
+			.getTasksFromDB(subject)
 			.subscribe((value) => this.onTasksLoaded(value, -1));
 	}
 
@@ -71,8 +73,6 @@ export class TimerTaskTrackerComponent implements OnInit {
 	}
 
 	loadTimerTasks(taskID: number): void {
-		this.timerService
-			.getTimerTasks()
-			.subscribe((timerTasks) => this.onTasksLoaded(timerTasks, taskID));
+		this.onTasksLoaded(this.timerTasks, taskID);
 	}
 }

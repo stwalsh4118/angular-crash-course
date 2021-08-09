@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 			user: string;
 		};
 		if (isValidUser == true) {
-			//TODO SIGN JWT AND SAVE TO LOCALSTORAGE AND REDIRECT TO MAIN PAGE
 			this.auth.signJWT(user).subscribe((value) => {
 				localStorage.token = value;
 				this.router.navigate(["/TimerTracker"]);
