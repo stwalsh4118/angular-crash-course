@@ -34,7 +34,7 @@ export class TimerService {
 
 	addTimerTask(timerTask: TimerTask, user: string): Observable<TimerTask> {
 		console.log("attempting to add timer task");
-		const apiUrl = "http://localhost:3000/api/addTimerTask";
+		const apiUrl = this.API_ROUTE + "api/addTimerTask";
 		const body = {
 			timerTask: timerTask,
 			user: user,
@@ -55,7 +55,7 @@ export class TimerService {
 
 	getTasksFromDB(username: string): Observable<any> {
 		console.log(username);
-		const url = "http://localhost:3000/api/user/" + username;
+		const url = this.API_ROUTE + "api/user/" + username;
 		return this.http.get<any>(url);
 	}
 }
