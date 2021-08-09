@@ -20,7 +20,9 @@ export class TimerService {
 		: "https://angular-crash-course.vercel.app/";
 
 	private apiUrl: string = "http://localhost:5000/timer-tasks";
-	private subject = new Subject<any>();
+	private updateTask = new Subject<any>();
+	private addTask = new Subject<any>();
+	private deleteTask = new Subject<any>();
 
 	constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -28,8 +30,16 @@ export class TimerService {
 		return this.http.get<TimerTask[]>(this.apiUrl);
 	}
 
+	onTaskUpdate(): Observable<any> {
+		return this.updateTask.asObservable();
+	}
+
 	updateTimerTask(timerTask: TimerTask): void {
-		this.subject.next(timerTask);
+		this.updateTask.next(timerTask);
+	}
+
+	onTaskAdd(): Observable<any> {
+		return this.addTask.asObservable();
 	}
 
 	addTimerTask(timerTask: TimerTask, user: string): Observable<TimerTask> {
@@ -41,16 +51,24 @@ export class TimerService {
 		};
 		console.log("after jwt verify");
 		console.log(body);
+		this.addTask.next(timerTask);
 		return this.http.post<TimerTask>(apiUrl, body, httpOptions);
 	}
 
-	deleteTask(timerTask: TimerTask): Observable<TimerTask> {
-		const url = `${this.apiUrl}/${timerTask.id}`;
-		return this.http.delete<TimerTask>(url);
+	onTaskDelete(): Observable<any> {
+		return this.deleteTask.asObservable();
 	}
 
-	onTasksChange(): Observable<any> {
-		return this.subject.asObservable();
+	deleteTimerTask(timerTask: TimerTask, user: string): Observable<TimerTask> {
+		console.log("attempting to delete timer task");
+		const apiUrl = this.API_ROUTE + "api/deleteTimerTask";
+		const body = {
+			timerTask: timerTask,
+			user: user,
+		};
+
+		this.deleteTask.next(timerTask.id);
+		return this.http.post<TimerTask>(apiUrl, body, httpOptions);
 	}
 
 	getTasksFromDB(username: string): Observable<any> {

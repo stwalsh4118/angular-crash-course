@@ -1,6 +1,11 @@
 <div class="task-actions-container">
 	<div class="timerTasksTitle">Todays Tasks</div>
-	<div class="loading" *ngIf="timerTasks.length == 0">Loading...</div>
+	<div class="loading" *ngIf="timerTasks.length == 0 && !loaded">
+		Loading...
+	</div>
+	<div class="loading" *ngIf="timerTasks.length == 0 && loaded">
+		No Tasks To Display!
+	</div>
 	<div class="timerTasksView">
 		<app-timer-task
 			*ngFor="let t of timerTasks"

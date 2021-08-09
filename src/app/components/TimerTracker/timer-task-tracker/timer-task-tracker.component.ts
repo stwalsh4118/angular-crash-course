@@ -13,16 +13,48 @@ import { TimerControllerComponent } from "../timer-controller/timer-controller.c
 export class TimerTaskTrackerComponent implements OnInit {
 	timerTasks: TimerTask[] = [];
 	currentTask: TimerTask = this.timerTasks[0];
-	subscription!: Subscription;
+	tasksLoaded: boolean = false;
+	taskAdded!: Subscription;
+	taskDeleted!: Subscription;
+	taskUpdated!: Subscription;
 	user!: string;
 
 	@ViewChild(TimerControllerComponent)
 	timerController!: TimerControllerComponent;
 
 	constructor(private timerService: TimerService, private auth: AuthService) {
-		this.subscription = this.timerService
-			.onTasksChange()
-			.subscribe((nextTaskID) => this.loadTimerTasks(nextTaskID));
+		this.taskAdded = this.timerService.onTaskAdd().subscribe((value) => {
+			this.timerTasks.push(value);
+			this.auth.verifyJWT(localStorage.token).subscribe((value) => {
+				this.retrieveTasks(value);
+			});
+		});
+
+		this.taskDeleted = this.timerService
+			.onTaskDelete()
+			.subscribe((value) => {
+				console.log(value);
+				if (this.currentTask.id == value) {
+					this.currentTask = this.timerTasks[0];
+				}
+				this.timerTasks = this.timerTasks.filter(
+					(task) => task.id !== value
+				);
+				console.log(this.timerTasks);
+				this.auth.verifyJWT(localStorage.token).subscribe((value) => {
+					this.retrieveTasks(value);
+				});
+			});
+
+		this.taskUpdated = this.timerService
+			.onTaskUpdate()
+			.subscribe((value) => {
+				const indexToUpdate = this.timerTasks.findIndex(
+					(task) => task.id === value.id
+				);
+				this.timerTasks[indexToUpdate] = value;
+				this.timerTasks = [...this.timerTasks];
+			});
 	}
 
 	ngOnInit(): void {
@@ -32,23 +64,35 @@ export class TimerTaskTrackerComponent implements OnInit {
 				this.retrieveTasks(value);
 			});
 		} else {
-			alert("Not Logged In! Continue using site or login to save Tasks!");
+			alert(
+				"Not Logged In! Continue vusing site or login to save Tasks!"
+			);
 			console.log("No session token, login to retrieve tasks!");
 			return;
 		}
 	}
 
 	retrieveTasks(user: any): void {
+		this.tasksLoaded = false;
 		console.log(user);
 		const subject = user.sub;
 		if (user.error) {
 			alert("Invalid Session Token, Login Again Please!");
 			return;
 		}
+
+		let id: number;
+
+		if (this.currentTask) {
+			id = this.currentTask.id as number;
+		} else {
+			id = -1;
+		}
+
 		console.log(subject);
 		this.timerService
 			.getTasksFromDB(subject)
-			.subscribe((value) => this.onTasksLoaded(value, -1));
+			.subscribe((value) => this.onTasksLoaded(value, id));
 	}
 
 	onTasksLoaded(timerTasks: TimerTask[], taskID: number): void {
@@ -65,6 +109,7 @@ export class TimerTaskTrackerComponent implements OnInit {
 		//this.timerController.currentTask = this.currentTask;
 		//this.timerController.timerTasks = this.timerTasks;
 		this.timerController.initTimer();
+		this.tasksLoaded = true;
 	}
 
 	onTaskChange(timerTask: TimerTask, taskID: number): void {

@@ -10,6 +10,7 @@
 	<div class="bottom-wrapper">
 		<app-timer-tasks-view
 			[timerTasks]="timerTasks"
+			[loaded]="tasksLoaded"
 			(taskClick)="onTaskChange($event.timerTask, $event.taskID)"
 		></app-timer-tasks-view>
 		<app-timer-task-add></app-timer-task-add>
