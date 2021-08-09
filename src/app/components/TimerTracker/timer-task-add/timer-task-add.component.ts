@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
+import { AuthService } from "src/app/services/auth.service";
 import { TaskAddValidationService } from "src/app/services/task-add-validation.service";
 import { TimerService } from "src/app/services/timer.service";
 import { TimerTask } from "src/app/TimerTask";
@@ -15,7 +16,8 @@ export class TimerTaskAddComponent implements OnInit {
 
 	constructor(
 		private timerService: TimerService,
-		private validation: TaskAddValidationService
+		private validation: TaskAddValidationService,
+		private auth: AuthService
 	) {}
 
 	ngOnInit(): void {}
@@ -45,9 +47,15 @@ export class TimerTaskAddComponent implements OnInit {
 
 		this.timerTaskDescription = "";
 		this.timerTaskLength = "";
+		this.auth
+			.verifyJWT(localStorage.token)
+			.subscribe((value) => this.onVerify(value, newTimerTask));
+	}
 
+	onVerify(user: any, timerTask: TimerTask): void {
+		const { sub } = user;
 		this.timerService
-			.addTimerTask(newTimerTask)
-			.subscribe(() => this.timerService.taskChange(-1));
+			.addTimerTask(timerTask, sub)
+			.subscribe(() => this.timerService.updateTimerTask(timerTask));
 	}
 }

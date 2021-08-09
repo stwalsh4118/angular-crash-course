@@ -24,6 +24,6 @@ export class TimerTaskComponent implements OnInit {
 	deleteTask(): void {
 		this.timerService
 			.deleteTask(this.timerTask)
-			.subscribe(() => this.timerService.taskChange(-1));
+			.subscribe(() => this.timerService.updateTimerTask(this.timerTask));
 	}
 }

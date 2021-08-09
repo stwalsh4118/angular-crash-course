@@ -56,14 +56,10 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 
 			if (typeof currentTaskId !== "undefined") {
 				let id: number = currentTaskId;
-				this.timerService
-					.updateTimerTask(this.currentTask)
-					.subscribe(() => this.changeTask(id));
+				this.timerService.updateTimerTask(this.currentTask);
 				console.log(id);
 			} else {
-				this.timerService
-					.updateTimerTask(this.currentTask)
-					.subscribe(() => this.changeTask(0));
+				this.timerService.updateTimerTask(this.currentTask);
 			}
 		}
 	}
@@ -76,8 +72,8 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 		this.initTimer();
 	}
 
-	changeTask(nextTaskID: number): void {
-		this.timerService.taskChange(nextTaskID);
+	changeTask(timerTask: TimerTask): void {
+		this.timerService.updateTimerTask(timerTask);
 	}
 
 	toggleTimerMode(): void {
