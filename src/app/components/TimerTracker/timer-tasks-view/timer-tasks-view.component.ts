@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
+import {
+	Component,
+	Input,
+	OnInit,
+	Output,
+	EventEmitter,
+	AfterViewChecked,
+} from "@angular/core";
 import { Subscription } from "rxjs";
 import { TimerService } from "src/app/services/timer.service";
 import { TimerTask } from "src/app/TimerTask";
@@ -8,7 +15,7 @@ import { TimerTask } from "src/app/TimerTask";
 	templateUrl: "./timer-tasks-view.component.html",
 	styleUrls: ["./timer-tasks-view.component.css"],
 })
-export class TimerTasksViewComponent implements OnInit {
+export class TimerTasksViewComponent implements OnInit, AfterViewChecked {
 	@Input() timerTasks: TimerTask[] = [];
 	@Input() loaded!: boolean;
 	@Output() taskClick: EventEmitter<any> = new EventEmitter();
@@ -30,6 +37,10 @@ export class TimerTasksViewComponent implements OnInit {
 	}
 
 	ngOnInit(): void {}
+
+	ngAfterViewChecked(): void {
+		this.timerTasks = [...this.timerTasks];
+	}
 
 	updateTimerTasks(): void {
 		console.log("updating task view");
