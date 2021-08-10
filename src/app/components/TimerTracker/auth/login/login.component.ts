@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 		if (isValidUser == true) {
 			this.auth.signJWT(user).subscribe((value) => {
 				localStorage.token = value;
-				this.router.navigate(["/TimerTracker"]);
+				this.router.navigate(["/"]);
 			});
 			return;
 		} else {
