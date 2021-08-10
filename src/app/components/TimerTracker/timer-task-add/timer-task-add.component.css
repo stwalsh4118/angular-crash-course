@@ -51,3 +51,7 @@
 .add-timer-task-submit:active {
 	transform: scale(0.98);
 }
+
+.add-timer-task-submit:hover {
+	cursor: pointer;
+}

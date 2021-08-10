@@ -7,10 +7,16 @@
 		No Tasks To Display!
 	</div>
 	<div class="timerTasksView">
-		<app-timer-task
-			*ngFor="let t of timerTasks"
-			[timerTask]="t"
-			(click)="onTaskClick(t)"
-		></app-timer-task>
+		<cdk-virtual-scroll-viewport
+			appendOnly
+			itemSize="50"
+			class="example-viewport"
+		>
+			<app-timer-task
+				*cdkVirtualFor="let t of timerTasks"
+				[timerTask]="t"
+				(click)="onTaskClick(t)"
+			></app-timer-task>
+		</cdk-virtual-scroll-viewport>
 	</div>
 </div>

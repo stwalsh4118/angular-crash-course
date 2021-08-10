@@ -69,6 +69,10 @@
 	transform: scale(0.98);
 }
 
+.login-submit:hover {
+	cursor: pointer;
+}
+
 :host {
 	width: 100%;
 	height: 100%;

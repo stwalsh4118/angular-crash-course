@@ -40,6 +40,10 @@
 	transform: scale(0.98);
 }
 
+.timerControllerButton:hover {
+	cursor: pointer;
+}
+
 .timerToggleButton {
 	height: 10vh;
 	width: 30vh;
@@ -63,4 +67,8 @@
 
 .refreshIcon:active {
 	transform: scale(0.98);
+}
+
+.refreshIcon:hover {
+	cursor: pointer;
 }

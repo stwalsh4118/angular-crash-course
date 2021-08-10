@@ -3,11 +3,18 @@
 	flex-direction: column;
 	align-items: start;
 	padding: 2vh;
+	width: 100%;
+	height: 100%;
 }
 
 .timerTasksTitle {
 	font-size: 30px;
 	text-align: center;
+}
+
+.example-viewport {
+	width: 100%;
+	height: 100%;
 }
 
 app-timer-task {
