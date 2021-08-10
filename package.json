@@ -33,6 +33,7 @@
     "crypto-browserify": "^3.12.0",
     "json-server": "^0.16.3",
     "jsonwebtoken": "^8.5.1",
+    "ngx-color-picker": "^11.0.0",
     "rxjs": "~6.6.0",
     "stream": "0.0.2",
     "tslib": "^2.2.0",

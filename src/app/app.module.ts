@@ -9,6 +9,7 @@ import { CdTimerModule } from "angular-cd-timer";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ScrollingModule } from "@angular/cdk/scrolling";
+import { ColorPickerModule } from "ngx-color-picker";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./components/header/header.component";
@@ -67,6 +68,7 @@ const appRoutes: Routes = [
 		MatButtonModule,
 		MatTooltipModule,
 		ScrollingModule,
+		ColorPickerModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

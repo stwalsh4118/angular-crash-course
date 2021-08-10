@@ -42,7 +42,7 @@
 	font-size: 2vh;
 	color: white;
 	border: none;
-	background-color: #f6b9d6;
+	background-color: var(--color);
 	filter: drop-shadow(0.2rem 0.2rem 0.1rem rgba(0, 0, 0, 0.5));
 	left: calc(50% - 10vh);
 	bottom: 20px;

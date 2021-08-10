@@ -1,9 +1,17 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import {
+	AfterContentChecked,
+	AfterViewChecked,
+	Component,
+	OnInit,
+	ViewChild,
+} from "@angular/core";
 import { Subscription } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 import { TimerService } from "src/app/services/timer.service";
 import { TimerTask } from "src/app/TimerTask";
 import { TimerControllerComponent } from "../timer-controller/timer-controller.component";
+import { faEyeDropper, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { ColorPickerComponent } from "ngx-color-picker";
 
 @Component({
 	selector: "app-timer-task-tracker",
@@ -18,7 +26,11 @@ export class TimerTaskTrackerComponent implements OnInit {
 	taskDeleted!: Subscription;
 	taskUpdated!: Subscription;
 	user!: string;
+	color: string = "#f5b8d6";
+	faEyeDropper = faEyeDropper;
 
+	@ViewChild("colorpicker")
+	colorPicker!: ColorPickerComponent;
 	@ViewChild(TimerControllerComponent)
 	timerController!: TimerControllerComponent;
 
@@ -60,6 +72,9 @@ export class TimerTaskTrackerComponent implements OnInit {
 
 	ngOnInit(): void {
 		//this.loadTimerTasks(1);
+		if (localStorage.color) {
+			this.color = localStorage.color;
+		}
 		if (localStorage.token) {
 			this.auth.verifyJWT(localStorage.token).subscribe((value) => {
 				this.retrieveTasks(value);
@@ -71,6 +86,10 @@ export class TimerTaskTrackerComponent implements OnInit {
 			console.log("No session token, login to retrieve tasks!");
 			return;
 		}
+	}
+
+	setLocalColor(): void {
+		localStorage.color = this.color;
 	}
 
 	retrieveTasks(user: any): void {
@@ -108,8 +127,6 @@ export class TimerTaskTrackerComponent implements OnInit {
 			this.currentTask = timerTasks[0];
 		}
 		this.timerTasks.sort((a, b) => a.id! - b.id!);
-		//this.timerController.currentTask = this.currentTask;
-		//this.timerController.timerTasks = this.timerTasks;
 		this.timerController.initTimer();
 		this.tasksLoaded = true;
 	}

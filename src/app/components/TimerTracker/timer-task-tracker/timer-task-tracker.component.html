@@ -1,5 +1,14 @@
-<div class="app-wrapper">
+<div [style.--color]="color" class="app-wrapper">
 	<a routerLink="/login" class="login-link">Login</a>
+	<fa-icon
+		[icon]="faEyeDropper"
+		size="2x"
+		matTooltip="Change Color Theme!"
+		[(colorPicker)]="color"
+		[cpToggle]="true"
+		(colorPickerChange)="setLocalColor()"
+		#colorpicker
+	></fa-icon>
 	<div class="top-wrapper">
 		<app-timer-controller
 			[timerTasks]="timerTasks"

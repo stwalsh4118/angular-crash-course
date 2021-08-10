@@ -19,12 +19,7 @@
 .app-wrapper {
 	width: 100%;
 	height: 100%;
-	background: rgb(245, 184, 214);
-	background: linear-gradient(
-		180deg,
-		rgba(245, 184, 214, 1) 0%,
-		rgba(255, 255, 255, 1) 100%
-	);
+	background: linear-gradient(180deg, var(--color) 0%, white 100%);
 }
 
 .login-link {
@@ -32,7 +27,7 @@
 	font-size: x-large;
 	color: white;
 	text-decoration: none;
-	margin: 3vh;
+	margin: 2vh;
 	right: 0%;
 	filter: drop-shadow(0.05rem 0.05rem 0.01rem rgba(0, 0, 0, 0.5));
 }
@@ -43,4 +38,19 @@
 
 .login-link:active {
 	transform: scale(0.98);
+}
+
+fa-icon {
+	color: white;
+	position: absolute;
+	margin: 2vh;
+	filter: drop-shadow(0.1rem 0.1rem 0.05rem rgba(0, 0, 0, 0.5));
+}
+
+fa-icon:active {
+	transform: scale(0.98);
+}
+
+fa-icon:hover {
+	cursor: pointer;
 }
