@@ -36,6 +36,7 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 	ngOnInit(): void {}
 
 	ngAfterViewInit(): void {
+		this.mainTimer.startTime = 1200;
 		this.mainTimer.start();
 		this.mainTimer.stop();
 		this.remainingTimer.start();

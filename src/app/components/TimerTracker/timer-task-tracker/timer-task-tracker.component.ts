@@ -35,7 +35,11 @@ export class TimerTaskTrackerComponent implements OnInit {
 			.subscribe((value) => {
 				console.log(value);
 				if (this.currentTask.id == value) {
-					this.currentTask = this.timerTasks[0];
+					if (this.currentTask.id == this.timerTasks[0].id) {
+						this.currentTask = this.timerTasks[1];
+					} else {
+						this.currentTask = this.timerTasks[0];
+					}
 				}
 				this.timerTasks = this.timerTasks.filter(
 					(task) => task.id !== value
