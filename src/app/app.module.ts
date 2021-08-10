@@ -30,7 +30,7 @@ import { LoginComponent } from "./components/TimerTracker/auth/login/login.compo
 import { RegisterComponent } from "./components/TimerTracker/auth/register/register.component";
 
 const appRoutes: Routes = [
-	{ path: "", component: TasksComponent },
+	{ path: "", component: TimerTaskTrackerComponent },
 	{ path: "about", component: AboutComponent },
 	{ path: "TimerTracker", component: TimerTaskTrackerComponent },
 	{ path: "login", component: LoginComponent },

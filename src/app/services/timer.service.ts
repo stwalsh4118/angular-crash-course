@@ -17,7 +17,7 @@ const httpOptions = {
 export class TimerService {
 	private API_ROUTE = !environment.production
 		? "http://localhost:3000/"
-		: "https://angular-crash-course.vercel.app/";
+		: "https://habitus.writhe.dev/";
 
 	private apiUrl: string = "http://localhost:5000/timer-tasks";
 	public updateTask = new Subject<any>();

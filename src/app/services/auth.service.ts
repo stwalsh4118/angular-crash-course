@@ -17,7 +17,7 @@ const httpOptions = {
 export class AuthService {
 	private API_ROUTE = !environment.production
 		? "http://localhost:3000/"
-		: "https://angular-crash-course.vercel.app/";
+		: "https://habitus.writhe.dev";
 
 	constructor(private http: HttpClient) {}
 
