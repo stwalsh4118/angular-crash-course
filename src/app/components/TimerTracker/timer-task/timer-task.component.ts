@@ -56,6 +56,11 @@ export class TimerTaskComponent implements OnInit, AfterViewChecked {
 
 	onVerify(timerTask: TimerTask, user: any) {
 		const username = user.sub;
-		this.timerService.deleteTimerTask(timerTask, username).subscribe();
+		this.timerService
+			.deleteTimerTask(timerTask, username)
+			.subscribe((value) => {
+				console.log("deleting from view");
+				this.timerService.deleteTask.next(timerTask.id);
+			});
 	}
 }

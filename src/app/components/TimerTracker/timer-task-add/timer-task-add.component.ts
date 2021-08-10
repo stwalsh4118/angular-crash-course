@@ -56,6 +56,6 @@ export class TimerTaskAddComponent implements OnInit {
 		const { sub } = user;
 		this.timerService
 			.addTimerTask(timerTask, sub)
-			.subscribe(() => this.timerService.updateTimerTask(timerTask));
+			.subscribe(() => this.timerService.addTask.next(timerTask));
 	}
 }

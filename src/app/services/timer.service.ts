@@ -20,9 +20,9 @@ export class TimerService {
 		: "https://angular-crash-course.vercel.app/";
 
 	private apiUrl: string = "http://localhost:5000/timer-tasks";
-	private updateTask = new Subject<any>();
-	private addTask = new Subject<any>();
-	private deleteTask = new Subject<any>();
+	public updateTask = new Subject<any>();
+	public addTask = new Subject<any>();
+	public deleteTask = new Subject<any>();
 
 	constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -51,7 +51,6 @@ export class TimerService {
 		};
 		console.log("after jwt verify");
 		console.log(body);
-		this.addTask.next(timerTask);
 		return this.http.post<TimerTask>(apiUrl, body, httpOptions);
 	}
 
@@ -67,7 +66,6 @@ export class TimerService {
 			user: user,
 		};
 
-		this.deleteTask.next(timerTask.id);
 		return this.http.post<TimerTask>(apiUrl, body, httpOptions);
 	}
 

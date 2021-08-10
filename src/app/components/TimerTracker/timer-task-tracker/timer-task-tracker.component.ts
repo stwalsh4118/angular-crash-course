@@ -41,9 +41,6 @@ export class TimerTaskTrackerComponent implements OnInit {
 					(task) => task.id !== value
 				);
 				console.log(this.timerTasks);
-				this.auth.verifyJWT(localStorage.token).subscribe((value) => {
-					this.retrieveTasks(value);
-				});
 			});
 
 		this.taskUpdated = this.timerService

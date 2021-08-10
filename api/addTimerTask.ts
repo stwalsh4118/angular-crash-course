@@ -19,11 +19,11 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 			where: { username: user },
 		})) as User;
 	} catch (err) {
-		response.status(200).send(err);
+		response.status(200).json(err);
 	}
 
 	if (!User!) {
-		response.status(200).send("No User Found!");
+		response.status(200).json("No User Found!");
 	}
 
 	const task = await prisma.timerTask.create({
@@ -34,5 +34,6 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 		},
 	});
 
+	response.status(200).json("task added");
 	console.log(task);
 };
