@@ -34,8 +34,17 @@ export class TimerService {
 		return this.updateTask.asObservable();
 	}
 
-	updateTimerTask(timerTask: TimerTask): void {
-		this.updateTask.next(timerTask);
+	updateTimerTask(timerTask: TimerTask, user: string): Observable<TimerTask> {
+		console.log("attempting to update timer task");
+		const apiUrl = this.API_ROUTE + "api/updateTimerTask";
+		const body = {
+			timerTask: timerTask,
+			user: user,
+		};
+		console.log("after jwt verify");
+		console.log(body);
+		//this.updateTask.next(timerTask);
+		return this.http.post<TimerTask>(apiUrl, body, httpOptions);
 	}
 
 	onTaskAdd(): Observable<any> {

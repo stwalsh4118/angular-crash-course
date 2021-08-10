@@ -2,6 +2,7 @@ import { Input } from "@angular/core";
 import { Component, OnInit, AfterViewInit, ViewChild } from "@angular/core";
 import { faRedo } from "@fortawesome/free-solid-svg-icons";
 import { CdTimerComponent } from "angular-cd-timer";
+import { AuthService } from "src/app/services/auth.service";
 import { TimerService } from "src/app/services/timer.service";
 import { TimerTask } from "src/app/TimerTask";
 
@@ -31,7 +32,10 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 
 	isPomodoro: boolean = true;
 
-	constructor(private timerService: TimerService) {}
+	constructor(
+		private timerService: TimerService,
+		private auth: AuthService
+	) {}
 
 	ngOnInit(): void {}
 
@@ -60,16 +64,15 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 				this.remainingTimer.get().tick_count;
 			this.currentTask.taskLength = this.remainingTimer.startTime;
 
-			let currentTaskId: number | undefined = this.currentTask.id;
-
-			if (typeof currentTaskId !== "undefined") {
-				let id: number = currentTaskId;
-				this.timerService.updateTimerTask(this.currentTask);
-				console.log(id);
-			} else {
-				this.timerService.updateTimerTask(this.currentTask);
-			}
+			this.auth
+				.verifyJWT(localStorage.token)
+				.subscribe((value) => this.onAuth(value, this.currentTask));
 		}
+	}
+
+	onAuth(response: any, timerTask: TimerTask) {
+		const username = response.sub as string;
+		this.timerService.updateTimerTask(timerTask, username).subscribe();
 	}
 
 	resetTimer() {
@@ -78,10 +81,6 @@ export class TimerControllerComponent implements OnInit, AfterViewInit {
 			this.toggleTimer();
 		}
 		this.initTimer();
-	}
-
-	changeTask(timerTask: TimerTask): void {
-		this.timerService.updateTimerTask(timerTask);
 	}
 
 	toggleTimerMode(): void {

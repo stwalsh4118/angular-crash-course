@@ -107,6 +107,7 @@ export class TimerTaskTrackerComponent implements OnInit {
 		} else {
 			this.currentTask = timerTasks[0];
 		}
+		this.timerTasks.sort((a, b) => a.id! - b.id!);
 		//this.timerController.currentTask = this.currentTask;
 		//this.timerController.timerTasks = this.timerTasks;
 		this.timerController.initTimer();
